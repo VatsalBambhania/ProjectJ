@@ -23,8 +23,7 @@ public class PodcastListAdapter extends ListAdapter<PodcastDetails, PodcastListA
 
         @Override
         public boolean areContentsTheSame(@NonNull PodcastDetails oldItem, @NonNull PodcastDetails newItem) {
-            return oldItem.duration.equals(newItem.duration)
-                    && oldItem.name.equals(newItem.name)
+            return oldItem.name.equals(newItem.name)
                     && oldItem.podcastBy.equals(newItem.podcastBy);
         }
     };

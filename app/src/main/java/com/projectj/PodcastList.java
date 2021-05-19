@@ -26,20 +26,20 @@ public class PodcastList extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        return inflater.inflate(R.layout.fragment_podcast_list, container, false);
-    }
-
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_podcast_list, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(MemberViewModel.class);
         Toast.makeText(requireContext(), "Count: " + viewModel.getCount(), Toast.LENGTH_SHORT).show();
         podcastListRv = view.findViewById(R.id.podcastList);
         adapter = new PodcastListAdapter();
         podcastListRv.setLayoutManager(new LinearLayoutManager(requireContext()));
-        viewModel.getAllPodcast().observe(requireActivity(), list -> {
-            adapter.submitList(list);
-        });
+        viewModel.getAllPodcast().observe(requireActivity(), list -> adapter.submitList(list));
         podcastListRv.setAdapter(adapter);
+        return view;
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 
     @Override
