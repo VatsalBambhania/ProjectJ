@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         if (user != null) {
             Toast.makeText(this, "Logging in", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this, MainActivity.class);
-            i.setFlags(i.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            i.setFlags(i.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
         }
 
@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                 auth.signInWithEmailAndPassword(userId, password).addOnCompleteListener(this, task->{
                     if(task.isSuccessful()) {
                         Intent i = new Intent(this, MainActivity.class);
-                        i.setFlags(i.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        i.setFlags(i.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i);
                     }
                     else

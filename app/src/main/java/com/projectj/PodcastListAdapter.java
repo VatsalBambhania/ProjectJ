@@ -1,5 +1,8 @@
 package com.projectj;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,26 +21,16 @@ import com.projectj.Database.PodcastDetails;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.projectj.PodcastFullView.PODCASTID;
+
 public class PodcastListAdapter extends RecyclerView.Adapter<PodcastListAdapter.PodcastListViewHolder> {
 
-//    public static DiffUtil.ItemCallback<PodcastDetails>  diffCallback = new DiffUtil.ItemCallback<PodcastDetails>() {
-//        @Override
-//        public boolean areItemsTheSame(@NonNull PodcastDetails oldItem, @NonNull PodcastDetails newItem) {
-//            return oldItem.id == newItem.id;
-//        }
-//
-//        @Override
-//        public boolean areContentsTheSame(@NonNull PodcastDetails oldItem, @NonNull PodcastDetails newItem) {
-//            return oldItem.name.equals(newItem.name)
-//                    && oldItem.podcastBy.equals(newItem.podcastBy);
-//        }
-//    };
-
     List<PodcastDetails> list;
+    Context context;
 
-    public PodcastListAdapter() {
-//        super(PodcastListAdapter.diffCallback);
+    public PodcastListAdapter(Context context) {
         list = new ArrayList<>();
+        this.context = context;
     }
 
     @NonNull
@@ -51,6 +45,12 @@ public class PodcastListAdapter extends RecyclerView.Adapter<PodcastListAdapter.
         holder.nameTv.setText(details.name);
         holder.durationTv.setText(details.duration);
         holder.podcastByTv.setText(details.podcastBy);
+        holder.itemView.setOnClickListener(view -> {
+            Intent i = new Intent(context, PodcastFullView.class);
+            Bundle args = new Bundle();
+            args.putInt(PODCASTID, details.getId());
+            context.startActivity(i, args);
+        });
         Log.i("Error", details.name);
     }
 

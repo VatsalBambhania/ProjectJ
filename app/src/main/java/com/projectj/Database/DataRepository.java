@@ -5,6 +5,8 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
+import com.projectj.AddPodcast;
+
 import java.util.List;
 
 public class DataRepository {
@@ -18,6 +20,10 @@ public class DataRepository {
         dao = database.dao();
         membersList = dao.getAllPodcast();
 
+    }
+
+    public void addPodcast(PodcastDetails details){
+        dao.AddPodcast(details);
     }
 
     public LiveData<List<PodcastDetails>> getAllPodcast(){

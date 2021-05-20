@@ -36,7 +36,7 @@ public class PodcastListFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(MemberViewModel.class);
         Toast.makeText(requireContext(), "Count: " + viewModel.getCount(), Toast.LENGTH_SHORT).show();
         podcastListRv = view.findViewById(R.id.podcastListRv);
-        adapter = new PodcastListAdapter();
+        adapter = new PodcastListAdapter(requireContext());
         podcastListRv.setLayoutManager(new LinearLayoutManager(requireContext()));
         podcastListRv.setAdapter(adapter);
         viewModel.getAllPodcast().observe(requireActivity(), list -> {

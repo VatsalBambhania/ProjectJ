@@ -24,12 +24,12 @@ import com.google.firebase.internal.InternalTokenProvider;
 
 public class MainActivity extends AppCompatActivity {
     
-    private MediaPlayer musicPlayer;
+    public static MediaPlayer musicPlayer;
     Toolbar toolbar;
     FloatingActionButton addNewPodcast;
     TextView podcastNameTv;
     Button playPauseBt;
-    boolean isPlaying = false;
+    public static boolean isPlaying = false;
     public static final int ADDNEWPODCAST = 1;
     public static final int ADDPODCASTSUCCESS = 2;
     public static final int ADDPODCASTFAILED = 3;
