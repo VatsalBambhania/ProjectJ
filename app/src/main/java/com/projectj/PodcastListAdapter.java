@@ -21,11 +21,15 @@ import com.projectj.Database.PodcastDetails;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.projectj.MainActivity.isPlaying;
+import static com.projectj.MainActivity.musicPlayer;
+import static com.projectj.MainActivity.playPauseBt;
 import static com.projectj.PodcastFullView.PODCASTID;
 
 public class PodcastListAdapter extends RecyclerView.Adapter<PodcastListAdapter.PodcastListViewHolder> {
 
     List<PodcastDetails> list;
+    public static int currentId=-1;
     Context context;
 
     public PodcastListAdapter(Context context) {
@@ -50,6 +54,24 @@ public class PodcastListAdapter extends RecyclerView.Adapter<PodcastListAdapter.
             i.putExtra(PODCASTID, details.getId());
             context.startActivity(i);
         });
+        if(currentId != details.id)
+            holder.playBt.setVisibility(View.GONE);
+        else {
+            holder.playBt.setBackground(ContextCompat.getDrawable(context,R.drawable.ic_pause));
+            holder.playBt.setVisibility(View.VISIBLE);
+        }
+
+        holder.playBt.setOnClickListener(view -> {
+            if(isPlaying){
+                holder.playBt.setVisibility(View.GONE);
+                playPauseBt.setBackground(ContextCompat.getDrawable(context,R.drawable.ic_play));
+                musicPlayer.pause();
+                isPlaying = false;
+                MainActivity.lastPlayed = currentId;
+                currentId = -1;
+            }
+        });
+
         Log.i("Error", details.name);
     }
 

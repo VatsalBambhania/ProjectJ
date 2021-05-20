@@ -22,14 +22,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.internal.InternalTokenProvider;
 
+import static com.projectj.PodcastListAdapter.currentId;
+import static com.projectj.PodcastListFragment.adapter;
+
 public class MainActivity extends AppCompatActivity {
-    
+
     public static MediaPlayer musicPlayer;
     Toolbar toolbar;
     FloatingActionButton addNewPodcast;
     TextView podcastNameTv;
-    Button playPauseBt;
+    public static Button playPauseBt;
     public static boolean isPlaying = false;
+    public static int lastPlayed = -1;
     public static final int ADDNEWPODCAST = 1;
     public static final int ADDPODCASTSUCCESS = 2;
     public static final int ADDPODCASTFAILED = 3;
@@ -49,21 +53,35 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         podcastNameTv = findViewById(R.id.podcastNameTv);
         playPauseBt = findViewById(R.id.playPauseBt);
-        addNewPodcast  = findViewById(R.id.addNewPodcast);
-        
+        addNewPodcast = findViewById(R.id.addNewPodcast);
+
         addNewPodcast.setOnClickListener(view -> {
             Intent i = new Intent(this, AddPodcast.class);
             startActivityForResult(i, ADDNEWPODCAST);
         });
 
+
         setSupportActionBar(toolbar);
-        musicPlayer = MediaPlayer.create(this, R.raw.uptown_funk);
+        musicPlayer = MediaPlayer.create(this, R.raw.podcast1);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(isPlaying){
+            Toast.makeText(this, "Yup playing", Toast.LENGTH_SHORT).show();
+            playPauseBt.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_pause));
+        }else{
+            playPauseBt.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_play));
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == ADDPODCASTSUCCESS)
+        if (resultCode == ADDPODCASTSUCCESS)
             Toast.makeText(this, "New Podcast Added", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(this, "Failed to add Podcast", Toast.LENGTH_SHORT).show();
@@ -80,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+//        noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(this, "Sign Out", Toast.LENGTH_SHORT).show();
@@ -89,43 +107,30 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
             finish();
             return true;
+        } else if (id == R.id.profile) {
+            Intent i = new Intent(this, UserProfile.class);
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);
     }
-    
-    public void changeStatus(View view){
-        if(isPlaying){
+
+    public void changeStatus(View view) {
+        if (isPlaying) {
             musicPlayer.pause();
             view.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_play));
             isPlaying = false;
-        }
-        else{
+            lastPlayed = currentId;
+            adapter.notifyDataSetChanged();
+            currentId = -1;
+        } else {
             musicPlayer.start();
+            lastPlayed = adapter.list.get(0).id;
+            currentId = lastPlayed;
+            adapter.notifyDataSetChanged();
             view.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_pause));
             isPlaying = true;
         }
     }
 
 }
-//    @Override
-//    public boolean onSupportNavigateUp() {
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-//        return NavigationUI.navigateUp(navController, appBarConfiguration)
-//                || super.onSupportNavigateUp();
-//    }
-
-
-//        setSupportActionBar(binding.toolbar);
-
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-//        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-//        binding.fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
