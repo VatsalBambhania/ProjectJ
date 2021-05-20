@@ -10,12 +10,13 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="#9FD5ED"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <FrameLayout
         android:id="@+id/container"
@@ -36,7 +37,8 @@
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/playPauseBt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_input_add"
+        />
 
     <TextView
         android:id="@+id/podcastNameTv"
@@ -47,7 +49,8 @@
         android:text="Podcast Name"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/merriweather_bold"/>
 
     <Button
         android:id="@+id/playPauseBt"

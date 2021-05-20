@@ -1,71 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/deleteBt"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PodcastFullView">
+    tools:context=".PodcastFullView"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Posdcast Playing"
+        android:textAlignment="center"
+        android:textColor="#9C27B0"
+        android:textSize="30sp"
+        android:fontFamily="@font/merriweather_bold"
+        android:layout_marginTop="10dp"
+        />
 
     <ImageView
         android:id="@+id/podcastImage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginBottom="68dp"
-        app:layout_constraintBottom_toTopOf="@+id/playPauseButton"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/music"
+        android:layout_marginTop="50dp"/>
 
-    <TextView
-        android:id="@+id/fullPodcastNameTv"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="97dp"
-        android:layout_marginTop="67dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        >
 
-    <Button
-        android:id="@+id/playPauseButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginBottom="76dp"
-        android:background="@drawable/ic_play"
-        android:onClick="plpa"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintStart_toStartOf="@+id/button" />
+        <TextView
+            android:id="@+id/fullPodcastNameTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_marginTop="30dp"
+            android:textSize="22sp"
+            android:textColor="#03A9F4"
+            android:padding="20dp"
+            />
 
-    <TextView
-        android:id="@+id/fullPodcastByTv"
-        android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/playPauseButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/ic_play"
+            android:onClick="plpa"
+
+            />
+
+    </LinearLayout>
+
+    <!-- <TextView
+         android:id="@+id/fullPodcastByTv"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="17dp"
+         android:layout_marginEnd="4dp"
+         android:text="TextView"
+         app:layout_constraintEnd_toEndOf="@+id/fullPodcastNameTv"
+         app:layout_constraintTop_toBottomOf="@+id/fullPodcastNameTv" />-->
+
+
+
+    <!-- <Button
+         android:id="@+id/button"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginBottom="120dp"
+         android:onClick="deletePodcast"
+         android:text="Delete podcast"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!-- <TextView
+         android:id="@+id/fullDurationTv"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+
+         android:text="TextView"
+          />-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="4dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/fullPodcastNameTv"
-        app:layout_constraintTop_toBottomOf="@+id/fullPodcastNameTv" />
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="-5dp"
+        android:id="@+id/bottom"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/fullPodcastByTv"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:background="@color/transparent"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/fullDurationTv"
+            android:text="Text view"
+            android:textSize="22sp"
+            android:textAlignment="center"
+            android:background="@color/transparent"
+
+            />
+    </LinearLayout>
+    <!-- <Button
+         android:id="@+id/button"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginBottom="120dp"
+         android:onClick="deletePodcast"
+         android:text="Delete podcast"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent" />-->
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/register_button"
+        android:fontFamily="@font/lora_bold"
+        android:inputType="textPersonName"
+        android:text="Log In"
+        android:textColor="#FFFFFF"
+        android:textSize="25dp"
         android:onClick="deletePodcast"
         android:text="Delete podcast"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"></Button>
 
-    <TextView
-        android:id="@+id/fullDurationTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="48dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/fullPodcastByTv"
-        app:layout_constraintTop_toBottomOf="@+id/fullPodcastByTv" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
