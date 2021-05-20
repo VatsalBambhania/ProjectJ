@@ -26,6 +26,18 @@ public class DataRepository {
         dao.AddPodcast(details);
     }
 
+    public void removePodcast(PodcastDetails details){
+        dao.RemovePodcast(details);
+    }
+
+    public void updatePodcast(PodcastDetails details){
+        dao.UpdatePodcast(details);
+    }
+
+    public PodcastDetails getPodcast(int id){
+        return dao.getPodcast(id);
+    }
+
     public LiveData<List<PodcastDetails>> getAllPodcast(){
         return dao.getAllPodcast();
     }
