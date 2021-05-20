@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.internal.InternalTokenProvider;
+import com.projectj.Database.PodcastDetails;
 
 import static com.projectj.PodcastListAdapter.currentId;
 import static com.projectj.PodcastListFragment.adapter;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     public static MediaPlayer musicPlayer;
     Toolbar toolbar;
     FloatingActionButton addNewPodcast;
-    TextView podcastNameTv;
+    static TextView podcastNameTv;
     public static Button playPauseBt;
     public static boolean isPlaying = false;
     public static int lastPlayed = -1;
@@ -70,11 +71,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        if(lastPlayed!=-1)
+            setPodcastName();
+
+
         if(isPlaying){
             Toast.makeText(this, "Yup playing", Toast.LENGTH_SHORT).show();
             playPauseBt.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_pause));
         }else{
             playPauseBt.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_play));
+        }
+    }
+
+    public static void setPodcastName(){
+        for (PodcastDetails d: adapter.list){
+            if(d.id==lastPlayed){
+                podcastNameTv.setText(d.name);
+                break;
+            }
         }
     }
 
@@ -123,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
             lastPlayed = currentId;
             adapter.notifyDataSetChanged();
             currentId = -1;
+            setPodcastName();
         } else {
             musicPlayer.start();
             lastPlayed = adapter.list.get(0).id;
@@ -130,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
             view.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_pause));
             isPlaying = true;
+            setPodcastName();
         }
     }
 
