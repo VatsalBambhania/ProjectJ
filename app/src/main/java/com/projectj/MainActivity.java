@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 
 import android.view.Menu;
@@ -23,12 +24,12 @@ import com.google.firebase.internal.InternalTokenProvider;
 
 public class MainActivity extends AppCompatActivity {
     
-    private MediaPlayer musicPlayer;
+    public static MediaPlayer musicPlayer;
     Toolbar toolbar;
     FloatingActionButton addNewPodcast;
     TextView podcastNameTv;
     Button playPauseBt;
-    boolean isPlaying = false;
+    public static boolean isPlaying = false;
     public static final int ADDNEWPODCAST = 1;
     public static final int ADDPODCASTSUCCESS = 2;
     public static final int ADDPODCASTFAILED = 3;
@@ -40,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.container, PodcastListFragment.class, null, "PodcastList")
+                .commit();
+        Toast.makeText(this, "MainActivity", Toast.LENGTH_SHORT).show();
         toolbar = findViewById(R.id.toolbar);
         podcastNameTv = findViewById(R.id.podcastNameTv);
         playPauseBt = findViewById(R.id.playPauseBt);
@@ -49,12 +55,9 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(this, AddPodcast.class);
             startActivityForResult(i, ADDNEWPODCAST);
         });
-        
-        musicPlayer = MediaPlayer.create(this, R.raw.uptown_funk);
-        
+
         setSupportActionBar(toolbar);
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, LoginFragment.class, null, "LoginFrag").commit();
+        musicPlayer = MediaPlayer.create(this, R.raw.uptown_funk);
     }
 
     @Override
@@ -81,8 +84,10 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_logout) {
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(this, "Sign Out", Toast.LENGTH_SHORT).show();
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, LoginFragment.class, null, "LoginFrag").commit();
+            Intent i = new Intent(this, LoginActivity.class);
+            i.setFlags(i.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+            finish();
             return true;
         }
 
@@ -92,10 +97,12 @@ public class MainActivity extends AppCompatActivity {
     public void changeStatus(View view){
         if(isPlaying){
             musicPlayer.pause();
+            view.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_play));
             isPlaying = false;
         }
         else{
             musicPlayer.start();
+            view.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_pause));
             isPlaying = true;
         }
     }

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/deleteBt"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PodcastFullView">
@@ -10,31 +11,51 @@
         android:id="@+id/podcastImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="73dp"
-        tools:layout_editor_absoluteY="176dp"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="54dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fullPodcastByTv"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/fullPodcastNameTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="97dp"
+        android:layout_marginTop="67dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="97dp"
-        tools:layout_editor_absoluteY="67dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/playPauseButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="189dp"
-        tools:layout_editor_absoluteY="432dp" />
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginBottom="83dp"
+        android:background="@drawable/ic_play"
+        android:onClick="plpa"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintStart_toStartOf="@+id/button" />
 
     <TextView
         android:id="@+id/fullPodcastByTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="4dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="103dp" />
+        app:layout_constraintEnd_toEndOf="@+id/fullPodcastNameTv"
+        app:layout_constraintTop_toBottomOf="@+id/fullPodcastNameTv" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="120dp"
+        android:text="Delete podcast"
+        android:onClick="deletePodcast"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

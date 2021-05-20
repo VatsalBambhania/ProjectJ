@@ -29,4 +29,8 @@ public class MemberViewModel extends AndroidViewModel {
         return repository.getCount();
     }
 
+    public void addPodcast(PodcastDetails details){
+        repository.addPodcast(details);
+    }
+
 }

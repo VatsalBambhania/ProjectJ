@@ -1,5 +1,9 @@
 package com.projectj;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,51 +11,65 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.projectj.Database.PodcastDetails;
 
-public class PodcastListAdapter extends ListAdapter<PodcastDetails, PodcastListAdapter.podcastListViewHolder> {
+import java.util.ArrayList;
+import java.util.List;
 
-    public static DiffUtil.ItemCallback<PodcastDetails>  diffCallback = new DiffUtil.ItemCallback<PodcastDetails>() {
-        @Override
-        public boolean areItemsTheSame(@NonNull PodcastDetails oldItem, @NonNull PodcastDetails newItem) {
-            return oldItem.id == newItem.id;
-        }
+import static com.projectj.PodcastFullView.PODCASTID;
 
-        @Override
-        public boolean areContentsTheSame(@NonNull PodcastDetails oldItem, @NonNull PodcastDetails newItem) {
-            return oldItem.name.equals(newItem.name)
-                    && oldItem.podcastBy.equals(newItem.podcastBy);
-        }
-    };
+public class PodcastListAdapter extends RecyclerView.Adapter<PodcastListAdapter.PodcastListViewHolder> {
 
-    public PodcastListAdapter() {
-        super(PodcastListAdapter.diffCallback);
+    List<PodcastDetails> list;
+    Context context;
+
+    public PodcastListAdapter(Context context) {
+        list = new ArrayList<>();
+        this.context = context;
     }
 
     @NonNull
     @Override
-    public podcastListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new podcastListViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.podcast_item_layout, parent, false));
+    public PodcastListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new PodcastListViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.podcast_item_layout, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull podcastListViewHolder holder, int position) {
-        PodcastDetails details = getItem(position);
+    public void onBindViewHolder(@NonNull PodcastListViewHolder holder, int position) {
+        PodcastDetails details = list.get(position);
         holder.nameTv.setText(details.name);
         holder.durationTv.setText(details.duration);
         holder.podcastByTv.setText(details.podcastBy);
+        holder.itemView.setOnClickListener(view -> {
+            Intent i = new Intent(context, PodcastFullView.class);
+            Bundle args = new Bundle();
+            args.putInt(PODCASTID, details.getId());
+            context.startActivity(i, args);
+        });
+        Log.i("Error", details.name);
     }
 
-    public static class podcastListViewHolder extends RecyclerView.ViewHolder{
+    public void setList(List<PodcastDetails> newList){
+        list = newList;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+    public static class PodcastListViewHolder extends RecyclerView.ViewHolder{
 
         TextView nameTv, durationTv, podcastByTv;
         Button playBt;
 
-        public podcastListViewHolder(@NonNull View itemView) {
+        public PodcastListViewHolder(@NonNull View itemView) {
             super(itemView);
             nameTv = itemView.findViewById(R.id.name);
             durationTv = itemView.findViewById(R.id.duration);

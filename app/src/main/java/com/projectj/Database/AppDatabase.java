@@ -8,12 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.projectj.PodcastList;
-
-import java.io.File;
 import java.lang.ref.WeakReference;
 
 @Database(entities = {PodcastDetails.class}, version = 1)

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.projectj.Database.MemberViewModel;
 
 
-public class PodcastList extends Fragment {
+public class PodcastListFragment extends Fragment {
 
     PodcastListAdapter adapter;
     RecyclerView podcastListRv;
@@ -27,19 +27,21 @@ public class PodcastList extends Fragment {
             Bundle savedInstanceState
     ) {
         View view = inflater.inflate(R.layout.fragment_podcast_list, container, false);
-        viewModel = new ViewModelProvider(requireActivity()).get(MemberViewModel.class);
-        Toast.makeText(requireContext(), "Count: " + viewModel.getCount(), Toast.LENGTH_SHORT).show();
-        podcastListRv = view.findViewById(R.id.podcastList);
-        adapter = new PodcastListAdapter();
-        podcastListRv.setLayoutManager(new LinearLayoutManager(requireContext()));
-        viewModel.getAllPodcast().observe(requireActivity(), list -> adapter.submitList(list));
-        podcastListRv.setAdapter(adapter);
+
         return view;
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        viewModel = new ViewModelProvider(requireActivity()).get(MemberViewModel.class);
+        Toast.makeText(requireContext(), "Count: " + viewModel.getCount(), Toast.LENGTH_SHORT).show();
+        podcastListRv = view.findViewById(R.id.podcastListRv);
+        adapter = new PodcastListAdapter(requireContext());
+        podcastListRv.setLayoutManager(new LinearLayoutManager(requireContext()));
+        podcastListRv.setAdapter(adapter);
+        viewModel.getAllPodcast().observe(requireActivity(), list -> {
+            adapter.setList(list);
+        });
     }
 
     @Override
