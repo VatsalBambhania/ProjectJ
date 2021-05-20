@@ -32,7 +32,6 @@ public class PodcastFullView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_podcast_full_view);
         int id = getIntent().getIntExtra(PODCASTID, -1);
-        Toast.makeText(this, "Id " + id, Toast.LENGTH_SHORT).show();
         if(id!=-1){
             name = findViewById(R.id.fullPodcastNameTv);
             by = findViewById(R.id.fullPodcastByTv);
@@ -68,7 +67,7 @@ public class PodcastFullView extends AppCompatActivity {
                 isPlaying = false;
             } else {
                 int rand = r.nextInt(3);
-                Toast.makeText(this, "Playing " + name, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Playing " + p.name, Toast.LENGTH_SHORT).show();
                 musicPlayer = MediaPlayer.create(this, pod[rand]);
                 musicPlayer.start();
                 view.setBackground(ContextCompat.getDrawable(this, R.drawable.ic_pause));
