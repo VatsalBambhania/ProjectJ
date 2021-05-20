@@ -17,7 +17,7 @@ import com.projectj.Database.MemberViewModel;
 
 public class PodcastListFragment extends Fragment {
 
-    PodcastListAdapter adapter;
+    public static PodcastListAdapter adapter;
     RecyclerView podcastListRv;
     MemberViewModel viewModel;
 
@@ -42,6 +42,7 @@ public class PodcastListFragment extends Fragment {
         viewModel.getAllPodcast().observe(requireActivity(), list -> {
             adapter.setList(list);
         });
+
     }
 
     @Override
