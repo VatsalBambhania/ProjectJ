@@ -15,16 +15,17 @@
         android:textAlignment="center"
         android:textColor="#9C27B0"
         android:textSize="30sp"
-        android:fontFamily="@font/merriweather_bold"
+        android:fontFamily="@font/lora_bold"
         android:layout_marginTop="10dp"
         />
 
     <ImageView
         android:id="@+id/podcastImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:srcCompat="@drawable/music"
-        android:layout_marginTop="50dp"/>
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/music" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -99,25 +100,26 @@
         >
 
         <TextView
+            android:id="@+id/fullPodcastByTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/fullPodcastByTv"
+            android:fontFamily="@font/lora_bold"
             android:text="TextView"
             android:textAlignment="center"
-            android:textSize="18sp"
-            android:background="@color/transparent"
-            />
+
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/lora_bold"
             android:id="@+id/fullDurationTv"
             android:text="Text view"
             android:textSize="22sp"
             android:textAlignment="center"
-            android:background="@color/transparent"
+
 
             />
     </LinearLayout>
@@ -142,7 +144,6 @@
         android:background="@drawable/register_button"
         android:fontFamily="@font/lora_bold"
         android:inputType="textPersonName"
-        android:text="Log In"
         android:textColor="#FFFFFF"
         android:textSize="25dp"
         android:onClick="deletePodcast"

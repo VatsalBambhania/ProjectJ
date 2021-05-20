@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProjectJ</string>
+    <string name="app_name">One Stop Motivation</string>
     <string name="action_logout">Logout</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

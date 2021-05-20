@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
             String userId = userIdEt.getText().toString().trim();
             String password = passwordEt.getText().toString().trim();
             if(!userId.isEmpty() && !password.isEmpty()){
-                Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
                 auth.signInWithEmailAndPassword(userId, password).addOnCompleteListener(this, task->{
                     if(task.isSuccessful()) {
                         Intent i = new Intent(this, MainActivity.class);
