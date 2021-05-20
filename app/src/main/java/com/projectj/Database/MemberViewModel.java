@@ -33,4 +33,16 @@ public class MemberViewModel extends AndroidViewModel {
         repository.addPodcast(details);
     }
 
+    public void removePodcast(PodcastDetails details){
+        repository.removePodcast(details);
+    }
+
+    public void updatePodcast(PodcastDetails details){
+        repository.updatePodcast(details);
+    }
+
+    public PodcastDetails getPodcast(int id){
+        return repository.getPodcast(id);
+    }
+
 }

@@ -47,9 +47,8 @@ public class PodcastListAdapter extends RecyclerView.Adapter<PodcastListAdapter.
         holder.podcastByTv.setText(details.podcastBy);
         holder.itemView.setOnClickListener(view -> {
             Intent i = new Intent(context, PodcastFullView.class);
-            Bundle args = new Bundle();
-            args.putInt(PODCASTID, details.getId());
-            context.startActivity(i, args);
+            i.putExtra(PODCASTID, details.getId());
+            context.startActivity(i);
         });
         Log.i("Error", details.name);
     }

@@ -20,13 +20,16 @@ public interface AppDao {
     @Query("SELECT count(*) FROM PodcastDetails")
     int getCount();
 
+    @Query("Select * from PodcastDetails where id = :id")
+    PodcastDetails getPodcast(int id);
+
     @Insert
     void AddPodcast(PodcastDetails details);
 
     @Delete
-    void RemovePerson(PodcastDetails details);
+    void RemovePodcast(PodcastDetails details);
 
     @Update
-    void UpdatePerson(PodcastDetails details);
+    void UpdatePodcast(PodcastDetails details);
 
 }
